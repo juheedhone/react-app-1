@@ -1,16 +1,28 @@
 import { useState } from "react";
 
 const App = () => {
-  const [pizza, setPizza] = useState({
-    name: "Spicy pepperoni",
-    toppings: ["mushroom"],
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 2", quantity: 1 },
+    ],
   });
 
   const handleClick = () => {
-    setPizza({ ...pizza, toppings: [...pizza.toppings, "cheese"] });
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
   };
-  console.log(pizza);
-  return <button onClick={handleClick}>Clicked</button>;
-};
+  console.log(cart);
 
+  return (
+    <div>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+};
 export default App;
