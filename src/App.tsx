@@ -1,26 +1,24 @@
-import Button from "./components/Buttons/Button";
+import { useState } from "react";
+const App = () => {
+  const [drink, setDrink] = useState({
+    title: "americano",
+    price: 5,
+  });
 
-let items = ["newYork", "america", "london", "paris", "tokyo"];
-const handleSelectedItem = (item: string) => {
-  console.log(item);
-};
+  const handleClick = () => {
+    const newDrink = {
+      ...drink,
+      price: 6,
+    };
+    setDrink(newDrink);
+  };
 
-function App() {
   return (
-    <>
-      {/* <ListGroup
-        items={items}
-        heading="Cities"
-        onSelectedItem={handleSelectedItem}
-      /> */}
-      <Button
-        children="My button"
-        onClick={() => {
-          console.log("clicked");
-        }}
-      />
-    </>
+    <div>
+      {drink.price}
+      <button onClick={handleClick}>Click Me</button>
+    </div>
   );
-}
+};
 
 export default App;
