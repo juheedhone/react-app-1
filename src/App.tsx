@@ -1,28 +1,33 @@
-import { useState } from "react";
+import ExpandableText from "./components/ExpandableText";
 
 const App = () => {
-  const [cart, setCart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, title: "Product 1", quantity: 1 },
-      { id: 2, title: "Product 2", quantity: 1 },
-    ],
-  });
-
-  const handleClick = () => {
-    setCart({
-      ...cart,
-      items: cart.items.map((item) =>
-        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
-      ),
-    });
-  };
-  console.log(cart);
-
   return (
     <div>
-      <button onClick={handleClick}>Click Me</button>
+      <ExpandableText>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore harum
+        aliquid veritatis. Facilis provident cum dolor impedit error
+        exercitationem quia et accusantium deleniti eius nisi laudantium
+        consequuntur voluptatibus, libero tempore?Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Recusandae esse perferendis nulla nihil,
+        quo tempora cum eligendi quibusdam, alias beatae libero consectetur?
+        Veniam magnam sapiente reiciendis nihil natus sint atque animi possimus
+        voluptatum quo fugiat culpa, eligendi architecto accusamus excepturi
+        aperiam ullam tempore voluptatibus minus ipsum, at qui fugit tempora!
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+        aliquam, itaque, nam fugit minus quod atque perferendis porro quibusdam
+        quis, ducimus aspernatur. Praesentium sed tenetur dolorem quia
+        consequatur? Reiciendis, dolorem ratione ex sequi nihil et temporibus
+        repellat repudiandae, blanditiis maiores exercitationem iure esse
+        assumenda tempore velit voluptas sint vitae, voluptates quos ipsam?
+        Ipsam, vero voluptatibus provident praesentium beatae tenetur,
+        temporibus enim ea sed eaque maiores et obcaecati? Unde facilis, quas in
+        nostrum voluptas ad dolore recusandae accusantium illo iure id
+        asperiores optio aspernatur pariatur nemo ratione debitis incidunt quo
+        adipisci voluptatem cum quisquam eaque! Iste ipsa doloribus ratione a
+        placeat!
+      </ExpandableText>
     </div>
   );
 };
+
 export default App;
