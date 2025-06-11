@@ -1,36 +1,50 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "Zod";
+import categories from "./categories";
 
 const schema = z.object({
-  name: z.string().min(3),
+  description: z.string().min(3),
   amount: z.number({ invalid_type_error: "Age field is required" }).min(18),
-  category: z.string().min(3),
+  category: z.enum(categories),
 });
 
 type FormData = z.infer<typeof schema>;
-const form = () => {
+
+interface Props {
+  onSubmitData: (data: FormData) => void;
+}
+
+const Form = ({ onSubmitData }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-  const onSubmit = (data: FieldValues) => console.log(data);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((data) => {
+        onSubmitData(data);
+        reset();
+      })}
+    >
       <div className="mb-3">
-        <label htmlFor="name" className="form-label">
+        <label htmlFor="description" className="form-label">
           Description
         </label>
         <input
-          {...register("name")}
-          id="name"
+          {...register("description")}
+          id="description"
           type="text"
           className="form-control"
         />
-        {errors.name && <p className="text-danger">{errors.name.message}</p>}
+        {errors.description && (
+          <p className="text-danger">{errors.description.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="amount" className="form-label">
@@ -50,16 +64,16 @@ const form = () => {
         <label htmlFor="category" className="form-label">
           Category
         </label>
-        <input
-          {...register("category")}
-          id="category"
-          type="text"
-          className="form-control"
-        />
-        {errors.category && (
-          <p className="text-danger">{errors.category.message}</p>
-        )}
+        <select id="category" className="form-select" {...register("category")}>
+          <option value=""></option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
+
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
@@ -67,4 +81,4 @@ const form = () => {
   );
 };
 
-export default form;
+export default Form;
