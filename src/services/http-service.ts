@@ -20,7 +20,7 @@ class httpService {
   }
 
   delete(id: number) {
-    return apiClient.delete(this.endpoint + id);
+    return apiClient.delete(this.endpoint + "/" + id);
   }
 
   add<T>(entity: T) {
@@ -32,6 +32,6 @@ class httpService {
   }
 }
 
-const create = (endpoint: string) => new httpService(endpoint)
+const create = (endpoint: string) => new httpService(endpoint);
 
-export default create
+export default create;
